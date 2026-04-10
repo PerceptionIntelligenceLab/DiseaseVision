@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import { FiMenu, FiX, FiUser, FiLogIn, FiUserPlus } from 'react-icons/fi'
 import { LuSunDim } from 'react-icons/lu'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Resources', href: '#resources' },
-  { name: 'Contact', href: '#contact' },
-]
+  { name: 'Home', to: '/' },
+  { name: 'About', to: '/about' },
+  { name: 'Services', to: '/services' },
+  { name: 'Resources', to: '/resources' },
+  { name: 'Contact', to: '/contact' },
+] as const
 
 type NavbarProps = {
   theme: 'white' | 'black'
@@ -20,7 +21,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
   const [open, setOpen] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
-  const [activeHref, setActiveHref] = useState('#home')
   const accountMenuRef = useRef<HTMLDivElement | null>(null)
   const mobileAccountRef = useRef<HTMLDivElement | null>(null)
   const isBlackTheme = theme === 'black'
@@ -37,17 +37,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
   }, [])
 
   useEffect(() => {
-    const syncActiveFromHash = () => {
-      const hash = window.location.hash || '#home'
-      setActiveHref(hash)
-    }
-
-    syncActiveFromHash()
-    window.addEventListener('hashchange', syncActiveFromHash)
-    return () => window.removeEventListener('hashchange', syncActiveFromHash)
-  }, [])
-
-  useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (!accountOpen) return
       const target = event.target as Node
@@ -61,6 +50,12 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
   }, [accountOpen])
 
   const closeMenu = () => setOpen(false)
+
+  const accountLinkClass = `w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
+    isBlackTheme
+      ? 'text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'
+      : 'text-black hover:bg-zinc-100 hover:text-zinc-900'
+  }`
 
   return (
     <>
@@ -94,30 +89,14 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
                       isBlackTheme ? 'bg-zinc-900' : 'bg-white'
                     }`}
                   >
-                    <button
-                      type="button"
-                      onClick={() => setAccountOpen(false)}
-                      className={`w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
-                        isBlackTheme
-                          ? 'text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'
-                          : 'text-black hover:bg-zinc-100 hover:text-zinc-900'
-                      }`}
-                    >
+                    <Link to="/login" onClick={() => setAccountOpen(false)} className={accountLinkClass}>
                       <FiLogIn size={15} />
                       Login
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAccountOpen(false)}
-                      className={`w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
-                        isBlackTheme
-                          ? 'text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'
-                          : 'text-black hover:bg-zinc-100 hover:text-zinc-900'
-                      }`}
-                    >
+                    </Link>
+                    <Link to="/signup" onClick={() => setAccountOpen(false)} className={accountLinkClass}>
                       <FiUserPlus size={15} />
                       Signup
-                    </button>
+                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -128,14 +107,16 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
           {/* desktop nav */}
           <nav className="hidden md:flex flex-1 justify-center items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <NavLink
                 key={link.name}
-                href={link.href}
-                onClick={() => setActiveHref(link.href)}
-                className={`text-sm transition-colors duration-200 ${activeHref === link.href ? `${navActiveClass} font-semibold` : navTextClass}`}
+                to={link.to}
+                end={link.to === '/'}
+                className={({ isActive }) =>
+                  `text-sm transition-colors duration-200 ${isActive ? `${navActiveClass} font-semibold` : navTextClass}`
+                }
               >
                 {link.name}
-              </a>
+              </NavLink>
             ))}
           </nav>
 
@@ -169,30 +150,14 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
                         isBlackTheme ? 'bg-zinc-900' : 'bg-white'
                       }`}
                     >
-                      <button
-                        type="button"
-                        onClick={() => setAccountOpen(false)}
-                        className={`w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
-                          isBlackTheme
-                            ? 'text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'
-                            : 'text-black hover:bg-zinc-100 hover:text-zinc-900'
-                        }`}
-                      >
+                      <Link to="/login" onClick={() => setAccountOpen(false)} className={accountLinkClass}>
                         <FiLogIn size={15} />
                         Login
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setAccountOpen(false)}
-                        className={`w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
-                          isBlackTheme
-                            ? 'text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'
-                            : 'text-black hover:bg-zinc-100 hover:text-zinc-900'
-                        }`}
-                      >
+                      </Link>
+                      <Link to="/signup" onClick={() => setAccountOpen(false)} className={accountLinkClass}>
                         <FiUserPlus size={15} />
                         Signup
-                      </button>
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -249,23 +214,23 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
               </button>
 
               {navLinks.map((link) => (
-                <a
+                <NavLink
                   key={link.name}
-                  href={link.href}
-                  onClick={() => {
-                    setActiveHref(link.href)
-                    closeMenu()
-                  }}
-                  className={`text-base transition-colors py-1 ${
-                    activeHref === link.href
-                      ? `${navActiveClass} font-semibold`
-                      : isBlackTheme
-                      ? 'text-zinc-300 hover:text-zinc-100'
-                      : 'text-black hover:text-zinc-700'
-                  }`}
+                  to={link.to}
+                  end={link.to === '/'}
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `text-base py-1 transition-colors ${
+                      isActive
+                        ? `${navActiveClass} font-semibold`
+                        : isBlackTheme
+                          ? 'text-zinc-300 hover:text-zinc-100'
+                          : 'text-black hover:text-zinc-700'
+                    }`
+                  }
                 >
                   {link.name}
-                </a>
+                </NavLink>
               ))}
             </motion.div>
           </>
