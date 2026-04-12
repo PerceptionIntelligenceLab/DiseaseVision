@@ -1,6 +1,7 @@
 import { Link, useOutletContext } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import matchImage from '../../assets/Websites/Match.png'
+import dnaImage from '../../assets/Websites/HomePage/DNA.png'
 import type { MainLayoutOutletContext } from './mainLayoutContext'
 
 const modalityItems = [
@@ -104,10 +105,11 @@ export default function HomePage() {
         </section>
         <section
           id="ai-medical-imaging"
-          className={`relative z-20 scroll-mt-20 rounded-t-[1.75rem] border-t px-5 py-16 sm:rounded-t-[2rem] sm:px-10 sm:py-20 md:py-24 ${panelBg} ${panelBorder} ${panelShadow}`}
+          className={`relative z-20 overflow-x-visible scroll-mt-20 rounded-t-[1.75rem] border-t py-16 pl-0 pr-5 sm:rounded-t-[2rem] sm:py-20 sm:pr-10 md:py-24 ${panelBg} ${panelBorder} ${panelShadow}`}
           aria-labelledby="home-ai-imaging-heading"
         >
-          <div className="mx-auto max-w-3xl text-left">
+          <div className="relative isolate w-full overflow-x-visible">
+            <div className="relative z-10 min-w-0 max-w-3xl px-5 text-left sm:px-10 lg:ml-auto lg:max-w-3xl lg:pl-10 lg:pr-2 xl:pl-12 xl:pr-4">
             <h2
               id="home-ai-imaging-heading"
               className={`font-serif text-2xl font-normal tracking-tight sm:text-3xl md:text-[2rem] ${
@@ -207,6 +209,31 @@ export default function HomePage() {
               reading rooms, improve standardization, and help patients benefit from timely,
               well-informed imaging interpretation.
             </p>
+            </div>
+
+            <motion.figure
+              className="pointer-events-none hidden overflow-visible lg:absolute lg:inset-y-0 lg:left-0 lg:z-0 lg:block lg:w-[min(92vw,52rem)] xl:w-[min(90vw,56rem)]"
+              initial={reduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.35, margin: '0px 0px -8% 0px' }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : {
+                      type: 'spring',
+                      stiffness: 260,
+                      damping: 32,
+                      mass: 0.85,
+                    }
+              }
+            >
+              <img
+                src={dnaImage}
+                alt="DNA double helix illustration"
+                className="h-full w-full object-contain object-left-bottom lg:absolute lg:inset-0 lg:max-h-none"
+                decoding="async"
+              />
+            </motion.figure>
           </div>
         </section>
       </div>
