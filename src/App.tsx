@@ -12,6 +12,7 @@ import AboutPage from './Pages/site/AboutPage'
 import ServicesPage from './Pages/site/ServicesPage'
 import ResourcesPage from './Pages/site/ResourcesPage'
 import ContactPage from './Pages/site/ContactPage'
+import OurTeamPage from './Pages/site/OurTeamPage'
 
 const THEME_STORAGE_KEY = 'models-frontend-theme'
 
@@ -65,6 +66,7 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="services" element={<ServicesPage />} />
+        <Route path="our-team" element={<OurTeamPage />} />
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
