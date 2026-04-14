@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import type { MainLayoutOutletContext } from './mainLayoutContext'
 import dentimapVideo from '../../assets/videos/dentimap.mp4'
 import polypVideo from '../../assets/videos/polyp.mp4'
@@ -14,7 +14,7 @@ const projects = [
     description:
       'Dental panoramic X-ray analysis model. Detects and maps teeth, identifies anomalies, and generates structured diagnostic reports for clinical review.',
     videoSrc: dentimapVideo,
-    link: 'https://huggingface.co/spaces/HarshithReddy01/Dentimap',
+    link: '/models/dentimap',
     videoLeft: true,
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     description:
       'Colonoscopy polyp segmentation model. Delivers real-time polyp detection with pixel-level precision, designed to support colorectal cancer screening.',
     videoSrc: polypVideo,
-    link: 'https://huggingface.co/spaces/HarshithReddy01/Polyp_Detection',
+    link: '/models/polyp',
     videoLeft: false,
   },
   {
@@ -35,6 +35,7 @@ const projects = [
       'Video Capsule Endoscopy AI. Classifies GI tract conditions and automatically flags bleeding, ulcers, and lesions across video frames in real time.',
     videoSrc: vceEndoVideo,
     link: 'https://huggingface.co/spaces/HarshithReddy01/Endoscopy',
+    external: true,
     videoLeft: true,
   },
 ] as const
@@ -51,7 +52,6 @@ export default function ServicesPage() {
       const el = sectionRefs.current[id]
       if (!el) return
 
-      // Add visible immediately if already in viewport
       const rect = el.getBoundingClientRect()
       if (rect.top < window.innerHeight && rect.bottom > 0) {
         el.classList.add('visible')
@@ -72,7 +72,6 @@ export default function ServicesPage() {
 
   return (
     <main className="services-page">
-      {/* ── Page header ── */}
       <header className="services-page-header">
         <p className="services-eyebrow">PerceptionIntelligenceLab</p>
         <h1
@@ -83,7 +82,6 @@ export default function ServicesPage() {
         </h1>
       </header>
 
-      {/* ── Project sections ── */}
       <div className="services-projects">
         {projects.map((project) => {
           const videoBlock = (
@@ -105,15 +103,22 @@ export default function ServicesPage() {
               <div className="project-description">
                 <p>{project.description}</p>
               </div>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-arrow-link"
-              >
-                Try our model&nbsp;
-                <span className="bouncing-arrow">→</span>
-              </a>
+              {'external' in project && project.external ? (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-arrow-link"
+                >
+                  Try our model&nbsp;
+                  <span className="bouncing-arrow">→</span>
+                </a>
+              ) : (
+                <Link to={project.link} className="project-arrow-link">
+                  Try our model&nbsp;
+                  <span className="bouncing-arrow">→</span>
+                </Link>
+              )}
             </div>
           )
 

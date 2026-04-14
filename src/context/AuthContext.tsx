@@ -41,7 +41,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(next))
     } catch {
-      /* ignore */
     }
   }, [])
 
@@ -50,7 +49,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.removeItem(AUTH_STORAGE_KEY)
     } catch {
-      /* Empty for now we will add latter for thsi one*/
     }
   }, [])
 

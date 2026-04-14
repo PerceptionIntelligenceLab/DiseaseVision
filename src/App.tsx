@@ -12,6 +12,8 @@ import AboutPage from './Pages/site/AboutPage'
 import ServicesPage from './Pages/site/ServicesPage'
 import ContactPage from './Pages/site/ContactPage'
 import OurTeamPage from './Pages/site/OurTeamPage'
+import PolypDetectionPage from './Pages/models/PolypDetectionPage'
+import DentimapPage from './Pages/models/DentimapPage'
 
 const THEME_STORAGE_KEY = 'models-frontend-theme'
 
@@ -36,7 +38,6 @@ function MainLayout() {
       try {
         localStorage.setItem(THEME_STORAGE_KEY, next)
       } catch {
-        /* ignorifn */
       }
       return next
     })
@@ -67,6 +68,8 @@ function App() {
         <Route path="services" element={<ServicesPage />} />
         <Route path="our-team" element={<OurTeamPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="models/polyp" element={<PolypDetectionPage />} />
+        <Route path="models/dentimap" element={<DentimapPage />} />
       </Route>
     </Routes>
   )

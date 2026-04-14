@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 import type { Config } from "tailwindcss";
 import scrollbarHide from "tailwind-scrollbar-hide";
 

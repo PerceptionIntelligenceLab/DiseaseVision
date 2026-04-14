@@ -76,7 +76,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── AI and medical imaging section ── */}
       <section
         id="ai-medical-imaging"
         className={`relative overflow-x-visible border-t py-16 pl-0 pr-5 sm:py-20 sm:pr-10 md:py-24 ${isDark ? 'border-zinc-800 bg-black' : 'border-zinc-200/90 bg-[#F8F9FA]'}`}

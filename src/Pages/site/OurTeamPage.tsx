@@ -56,7 +56,6 @@ function useInView(threshold = 0.15): [React.RefObject<HTMLDivElement | null>, b
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    // trigger immediately if already in viewport
     const rect = el.getBoundingClientRect()
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       setIsVisible(true)
@@ -103,7 +102,6 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
         cursor: 'default',
       }}
     >
-      {/* Photo */}
       <div
         style={{
           position: 'relative',
@@ -141,7 +139,6 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
         />
       </div>
 
-      {/* Name */}
       <h3
         style={{
           fontFamily: "'Playfair Display', Georgia, serif",
@@ -157,7 +154,6 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
         {member.name}
       </h3>
 
-      {/* Role */}
       <span
         style={{
           fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
@@ -176,7 +172,6 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
         {member.role}
       </span>
 
-      {/* Divider */}
       <div
         style={{
           width: hovered ? 60 : 30,
@@ -188,7 +183,6 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
         }}
       />
 
-      {/* Description */}
       <p
         style={{
           fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
@@ -256,10 +250,8 @@ export default function OurTeamPage() {
         transition: 'background 0.3s ease',
       }}
     >
-      {/* Google Fonts */}
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500&display=swap');`}</style>
 
-      {/* Header */}
       <div
         style={{
           textAlign: 'center',
@@ -305,7 +297,6 @@ export default function OurTeamPage() {
         />
       </div>
 
-      {/* Cards */}
       <div
         style={{
           display: 'flex',

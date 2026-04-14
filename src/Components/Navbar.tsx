@@ -68,7 +68,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between w-full overflow-visible">
           <div className="flex items-center min-w-0">
-            {/* mobile: user + Login/Signup dropdown */}
             <div className="md:hidden relative" ref={mobileAccountRef}>
               <button
                 type="button"
@@ -104,7 +103,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
             <div className="hidden md:block w-6 md:w-8" />
           </div>
 
-          {/* desktop nav */}
           <nav className="hidden md:flex flex-1 justify-center items-center gap-8">
             {navLinks.map((link) => (
               <NavLink
@@ -164,7 +162,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
               </div>
             </div>
 
-            {/* mobile: nav Bar for teh Mobile*/}
             <button
               type="button"
               className={`md:hidden p-1 transition-colors ${isBlackTheme ? 'text-zinc-400 hover:text-zinc-100' : 'text-zinc-700 hover:text-zinc-900'}`}
@@ -180,7 +177,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
         </div>
       </header>
 
-      {/* Opesn in the Right side */}
       <AnimatePresence>
         {open && (
           <>
@@ -192,7 +188,6 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
               onClick={closeMenu}
             />
 
-            
             <motion.div
               className={`fixed top-0 right-0 h-full w-64 z-50 flex flex-col pt-6 pb-8 px-6 gap-6 shadow-[-8px_0_32px_rgba(0,0,0,0.12)] md:hidden ${
                 isBlackTheme ? 'bg-zinc-900' : 'bg-white'

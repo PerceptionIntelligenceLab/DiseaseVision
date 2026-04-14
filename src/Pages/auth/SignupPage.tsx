@@ -68,7 +68,6 @@ export default function SignupPage() {
             }),
           )
         } catch {
-          /* ignore */
         }
         toast({
           title: 'Registration started',
