@@ -1,24 +1,36 @@
+import { useEffect } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
 import matchImage from '../../assets/Websites/Match.png'
 import type { MainLayoutOutletContext } from './mainLayoutContext'
 
 export default function HomePage() {
   const { theme } = useOutletContext<MainLayoutOutletContext>()
   const isDark = theme === 'black'
-  const reduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    const html = document.documentElement
+    const body = document.body
+    const prevHtml = html.style.overflow
+    const prevBody = body.style.overflow
+    html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = prevHtml
+      body.style.overflow = prevBody
+    }
+  }, [])
 
   return (
-    <main className="relative pt-[4.75rem]">
+    <main className="relative box-border flex h-dvh max-h-dvh flex-col overflow-hidden overscroll-none pt-[4.75rem]">
       <div
         aria-hidden
         className="pointer-events-none fixed inset-x-0 bottom-0 top-[4.75rem] z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${matchImage})` }}
       />
 
-      <div className="relative z-10">
-        <section className="relative flex min-h-[calc(100dvh-4.75rem)] flex-col">
-          <div className="flex min-h-[inherit] flex-col items-center justify-center px-5 pb-20 pt-10 text-center sm:px-10 sm:pb-24 sm:pt-14">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col">
+        <section className="relative flex min-h-0 flex-1 flex-col">
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden px-5 py-8 text-center sm:px-10 sm:py-12">
             <div
               className={`w-full max-w-4xl translate-y-2 rounded-3xl sm:translate-y-6 md:translate-y-10 ${
                 isDark ? 'px-6 py-10 sm:px-10 sm:py-12' : 'px-2 py-4 sm:px-4'

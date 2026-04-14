@@ -10,7 +10,6 @@ import ForgotPasswordOtpPage from './Pages/auth/ForgotPasswordOtpPage'
 import ResetPasswordPage from './Pages/auth/ResetPasswordPage'
 import AboutPage from './Pages/site/AboutPage'
 import ServicesPage from './Pages/site/ServicesPage'
-import ResourcesPage from './Pages/site/ResourcesPage'
 import ContactPage from './Pages/site/ContactPage'
 import OurTeamPage from './Pages/site/OurTeamPage'
 
@@ -67,7 +66,6 @@ function App() {
         <Route path="about" element={<AboutPage />} />
         <Route path="services" element={<ServicesPage />} />
         <Route path="our-team" element={<OurTeamPage />} />
-        <Route path="resources" element={<ResourcesPage />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
     </Routes>
