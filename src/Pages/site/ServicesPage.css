@@ -209,6 +209,51 @@
   animation: bounce-arrow 2s ease-in-out infinite;
 }
 
+/* ── Light theme ─────────────────────────────────── */
+.services-page.light {
+  color: #1e293b;
+}
+.services-page.light .services-main-title {
+  color: #0f172a;
+}
+.services-page.light .services-eyebrow {
+  color: #2563eb;
+}
+.services-page.light .text-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+.services-page.light .model-badge {
+  color: #2563eb;
+}
+.services-page.light .project-title {
+  color: #0f172a;
+}
+.services-page.light .title-underline {
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
+.services-page.light .project-description p {
+  color: #475569;
+}
+.services-page.light .project-arrow-link {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+.services-page.light .project-arrow-link:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #ffffff;
+}
+.services-page.light .video-overlay-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(59, 130, 246, 0.03),
+    rgba(0, 0, 0, 0.15)
+  );
+}
+
 @media (max-width: 1160px) {
   .split-screen-container {
     gap: 1.25rem;

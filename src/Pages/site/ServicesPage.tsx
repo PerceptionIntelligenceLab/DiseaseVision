@@ -34,8 +34,7 @@ const projects = [
     description:
       'Video Capsule Endoscopy AI. Classifies GI tract conditions and automatically flags bleeding, ulcers, and lesions across video frames in real time.',
     videoSrc: vceEndoVideo,
-    link: 'https://huggingface.co/spaces/HarshithReddy01/Endoscopy',
-    external: true,
+    link: '/models/vce',
     videoLeft: true,
   },
 ] as const
@@ -71,13 +70,10 @@ export default function ServicesPage() {
   }, [])
 
   return (
-    <main className="services-page">
+    <main className={`services-page${isDark ? '' : ' light'}`}>
       <header className="services-page-header">
         <p className="services-eyebrow">PerceptionIntelligenceLab</p>
-        <h1
-          className="services-main-title"
-          style={{ color: isDark ? '#ffffff' : '#0f172a' }}
-        >
+        <h1 className="services-main-title">
           AI-Powered Medical Models
         </h1>
       </header>
