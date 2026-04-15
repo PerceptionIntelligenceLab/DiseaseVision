@@ -6,6 +6,8 @@ import polypVideo from '../../assets/videos/polyp.mp4'
 import vceEndoVideo from '../../assets/videos/vce-endo.mp4'
 import './ServicesPage.css'
 
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 const projects = [
   {
     id: 'dentimap',
@@ -118,7 +120,7 @@ export default function ServicesPage() {
                 </a>
               ) : (
                 <a
-                  href={project.link}
+                  href={`${BASE_PATH}${project.link}`}
                   className="project-arrow-link"
                   onClick={(e) => {
                     // Keep normal SPA navigation, but allow Ctrl/Cmd/middle-click to open new tab.

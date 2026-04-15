@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import type { MainLayoutOutletContext } from './mainLayoutContext'
 import debeshImg from '../../assets/DebeshJha.png'
 import harshithImg from '../../assets/Harshith.png'
 import saiImg from '../../assets/Sai.png'
+import { FiArrowLeft } from 'react-icons/fi'
 
 interface TeamMember {
   name: string
@@ -74,22 +75,15 @@ function useInView(threshold = 0.15): [React.RefObject<HTMLDivElement | null>, b
 
 function TeamCard({ member, index, isDark }: TeamCardProps) {
   const [ref, isVisible] = useInView(0.15)
-  const [hovered, setHovered] = useState(false)
 
   const textPrimary = isDark ? '#f1f5f9' : '#1a1a1a'
   const textSecondary = isDark ? '#94a3b8' : '#999'
   const textBody = isDark ? '#cbd5e1' : '#666'
-  const textBodyHover = isDark ? '#e2e8f0' : '#444'
   const dividerColor = isDark ? '#e2e8f0' : '#1a1a1a'
-  const shadowHover = isDark
-    ? '0 20px 60px rgba(0,0,0,0.5), 0 0 0 4px #334155'
-    : '0 20px 60px rgba(0,0,0,0.12), 0 0 0 4px #1a1a1a'
 
   return (
     <div
       ref={ref}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(60px)',
@@ -110,9 +104,9 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
           borderRadius: 24,
           overflow: 'hidden',
           marginBottom: 32,
-          boxShadow: hovered ? shadowHover : '0 8px 30px rgba(0,0,0,0.1)',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
           transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
-          transform: hovered ? 'scale(1.04)' : 'scale(1)',
+          transform: 'scale(1)',
         }}
       >
         <img
@@ -125,7 +119,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
             height: '100%',
             objectFit: 'cover',
             objectPosition: member.objectPosition ?? 'center top',
-            filter: hovered ? 'grayscale(0%)' : 'grayscale(15%)',
+            filter: 'grayscale(15%)',
             transition: 'filter 0.6s ease',
           }}
         />
@@ -133,9 +127,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
           style={{
             position: 'absolute',
             inset: 0,
-            background: hovered
-              ? 'transparent'
-              : 'linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.08) 100%)',
+            background: 'linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.08) 100%)',
             transition: 'all 0.5s ease',
           }}
         />
@@ -148,7 +140,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
           fontWeight: 700,
           color: textPrimary,
           margin: '0 0 6px 0',
-          letterSpacing: hovered ? '0.02em' : '-0.02em',
+          letterSpacing: '-0.02em',
           transition: 'letter-spacing 0.4s ease, color 0.3s ease',
           textAlign: 'center',
         }}
@@ -163,7 +155,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
           fontWeight: 500,
           textTransform: 'uppercase',
           letterSpacing: '0.14em',
-          color: hovered ? textPrimary : textSecondary,
+          color: textSecondary,
           marginBottom: 20,
           transition: 'color 0.4s ease',
           textAlign: 'center',
@@ -176,7 +168,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
 
       <div
         style={{
-          width: hovered ? 60 : 30,
+          width: 30,
           height: 2,
           background: dividerColor,
           marginBottom: 20,
@@ -190,7 +182,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
           fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
           fontSize: 15,
           lineHeight: 1.75,
-          color: hovered ? textBodyHover : textBody,
+          color: textBody,
           textAlign: 'center',
           margin: 0,
           maxWidth: 300,
@@ -215,7 +207,7 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
           textDecoration: 'none',
           letterSpacing: '0.02em',
           transition: 'opacity 0.2s ease',
-          opacity: hovered ? 1 : 0.7,
+          opacity: 0.85,
         }}
       >
         View Portfolio →
@@ -234,7 +226,7 @@ export default function OurTeamPage() {
     return () => clearTimeout(t)
   }, [])
 
-  const bg = isDark ? 'transparent' : '#ffffff'
+  const bg = isDark ? '#020617' : '#ffffff'
   const headingColor = isDark ? '#f1f5f9' : '#1a1a1a'
   const subColor = isDark ? '#94a3b8' : '#999'
   const lineColor = isDark ? 'linear-gradient(to bottom, #334155, transparent)' : 'linear-gradient(to bottom, #ddd, transparent)'
@@ -253,6 +245,25 @@ export default function OurTeamPage() {
       }}
     >
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500&display=swap');`}</style>
+
+      <div style={{ width: '100%', maxWidth: 1200, marginBottom: 20 }}>
+        <Link
+          to="/services"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            fontSize: 13,
+            fontWeight: 500,
+            color: isDark ? '#60a5fa' : '#2563eb',
+            textDecoration: 'none',
+            opacity: 0.9,
+          }}
+        >
+          <FiArrowLeft size={14} />
+          Back to Services
+        </Link>
+      </div>
 
       <div
         style={{
