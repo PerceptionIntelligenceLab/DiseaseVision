@@ -3,18 +3,15 @@ import { Link, useOutletContext } from 'react-router-dom'
 import { FiUploadCloud, FiArrowLeft, FiX, FiDownload } from 'react-icons/fi'
 import type { MainLayoutOutletContext } from '../site/mainLayoutContext'
 import { generateReport } from './generateReport'
+import vce1 from '../../assets/test-images/vce/sample1.jpg'
+import vce2 from '../../assets/test-images/vce/sample2.jpg'
+import vce3 from '../../assets/test-images/vce/sample3.jpg'
+import vce4 from '../../assets/test-images/vce/sample4.jpg'
+import vce5 from '../../assets/test-images/vce/sample5.jpg'
 import './ModelPage.css'
 
 const API_URL = 'https://harshithreddy01-endoscopy.hf.space/api/v1/predict'
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
-
-const SAMPLE_IMAGES = [
-  `${BASE}/test-images/vce/sample1.jpg`,
-  `${BASE}/test-images/vce/sample2.jpg`,
-  `${BASE}/test-images/vce/sample3.jpg`,
-  `${BASE}/test-images/vce/sample4.jpg`,
-  `${BASE}/test-images/vce/sample5.jpg`,
-]
+const SAMPLE_IMAGES = [vce1, vce2, vce3, vce4, vce5]
 
 const CLASS_NAMES: string[] = [
   'ampulla_of_vater',
@@ -428,3 +425,4 @@ export default function VCEClassificationPage() {
     </div>
   )
 }
+

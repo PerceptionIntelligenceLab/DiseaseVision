@@ -3,18 +3,15 @@ import { Link, useOutletContext } from 'react-router-dom'
 import { FiUploadCloud, FiArrowLeft, FiX, FiDownload } from 'react-icons/fi'
 import type { MainLayoutOutletContext } from '../site/mainLayoutContext'
 import { generateReport } from './generateReport'
+import dentalXray from '../../assets/test-images/dentimap/DentalX-ray.png'
+import dental2 from '../../assets/test-images/dentimap/dental2.png'
+import dental3 from '../../assets/test-images/dentimap/dental3.png'
+import dental4 from '../../assets/test-images/dentimap/dental4.png'
+import dental5 from '../../assets/test-images/dentimap/dental5.png'
 import './ModelPage.css'
 
 const API_URL = 'https://harshithreddy01-dentimap.hf.space/api/v1/inference/predict'
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
-
-const SAMPLE_IMAGES = [
-  `${BASE}/test-images/dentimap/DentalX-ray.png`,
-  `${BASE}/test-images/dentimap/dental2.png`,
-  `${BASE}/test-images/dentimap/dental3.png`,
-  `${BASE}/test-images/dentimap/dental4.png`,
-  `${BASE}/test-images/dentimap/dental5.png`,
-]
+const SAMPLE_IMAGES = [dentalXray, dental2, dental3, dental4, dental5]
 
 export default function DentimapPage() {
   const { theme } = useOutletContext<MainLayoutOutletContext>()
@@ -249,3 +246,4 @@ export default function DentimapPage() {
     </div>
   )
 }
+

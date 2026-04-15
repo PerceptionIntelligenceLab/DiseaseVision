@@ -3,19 +3,16 @@ import { Link, useOutletContext } from 'react-router-dom'
 import { FiUploadCloud, FiArrowLeft, FiX, FiDownload } from 'react-icons/fi'
 import type { MainLayoutOutletContext } from '../site/mainLayoutContext'
 import { generateReport } from './generateReport'
+import polyp1 from '../../assets/test-images/polyp/cju1b0y2e396p08558ois175d.jpg'
+import polyp2 from '../../assets/test-images/polyp/cju1b3zgj3d8e0801kpolea6c.jpg'
+import polyp3 from '../../assets/test-images/polyp/cju1b75x63ddl0799sdp0i2j3.jpg'
+import polyp4 from '../../assets/test-images/polyp/cju1bhnfitmge0835ynls0l6b.jpg'
+import polyp5 from '../../assets/test-images/polyp/cju1bm8063nmh07996rsjjemq.jpg'
+import polyp6 from '../../assets/test-images/polyp/cju1brhsj3rls0855a1vgdlen.jpg'
 import './ModelPage.css'
 
 const API_URL = 'https://harshithreddy01-polyp-detection.hf.space/predict?model=Kvasir-Seg'
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
-
-const SAMPLE_IMAGES = [
-  `${BASE}/test-images/polyp/cju1b0y2e396p08558ois175d.jpg`,
-  `${BASE}/test-images/polyp/cju1b3zgj3d8e0801kpolea6c.jpg`,
-  `${BASE}/test-images/polyp/cju1b75x63ddl0799sdp0i2j3.jpg`,
-  `${BASE}/test-images/polyp/cju1bhnfitmge0835ynls0l6b.jpg`,
-  `${BASE}/test-images/polyp/cju1bm8063nmh07996rsjjemq.jpg`,
-  `${BASE}/test-images/polyp/cju1brhsj3rls0855a1vgdlen.jpg`,
-]
+const SAMPLE_IMAGES = [polyp1, polyp2, polyp3, polyp4, polyp5, polyp6]
 
 interface PolypResult {
   mask: string
@@ -323,3 +320,4 @@ export default function PolypDetectionPage() {
     </div>
   )
 }
+
