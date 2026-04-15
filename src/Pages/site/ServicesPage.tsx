@@ -87,19 +87,9 @@ export default function ServicesPage() {
           const videoBlock = (
             <div className="video-section">
               <div className="video-wrapper">
-                {!isVideoReady ? (
-                  <button
-                    type="button"
-                    className="video-load-btn"
-                    onClick={() => setReadyVideos((prev) => ({ ...prev, [project.id]: true }))}
-                  >
-                    Load Preview
-                  </button>
-                ) : (
-                  <video autoPlay muted loop playsInline preload="metadata">
-                    <source src={project.videoSrc} type="video/mp4" />
-                  </video>
-                )}
+                <video autoPlay={isVideoReady} muted loop playsInline preload="none">
+                  {isVideoReady && <source src={project.videoSrc} type="video/mp4" />}
+                </video>
               </div>
               <div className="video-overlay-gradient" />
             </div>
