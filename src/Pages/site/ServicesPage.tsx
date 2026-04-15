@@ -55,12 +55,14 @@ export default function ServicesPage() {
       const rect = el.getBoundingClientRect()
       if (rect.top < window.innerHeight && rect.bottom > 0) {
         el.classList.add('visible')
+        setReadyVideos((prev) => (prev[id] ? prev : { ...prev, [id]: true }))
       }
 
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
             el.classList.add('visible')
+            setReadyVideos((prev) => (prev[id] ? prev : { ...prev, [id]: true }))
           }
         },
         { threshold: 0.1 },
