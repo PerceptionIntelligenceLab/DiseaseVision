@@ -43,7 +43,7 @@ export default function ServicesPage() {
   const { theme } = useOutletContext<MainLayoutOutletContext>()
   const isDark = theme === 'black'
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
-  const [loadedVideos, setLoadedVideos] = useState<Record<string, boolean>>({})
+  const [readyVideos, setReadyVideos] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -61,7 +61,6 @@ export default function ServicesPage() {
         ([entry]) => {
           if (entry.isIntersecting) {
             el.classList.add('visible')
-            setLoadedVideos((prev) => (prev[id] ? prev : { ...prev, [id]: true }))
           }
         },
         { threshold: 0.1 },
@@ -84,12 +83,23 @@ export default function ServicesPage() {
 
       <div className="services-projects">
         {projects.map((project) => {
+          const isVideoReady = !!readyVideos[project.id]
           const videoBlock = (
             <div className="video-section">
               <div className="video-wrapper">
-                <video autoPlay={!!loadedVideos[project.id]} muted loop playsInline preload="metadata">
-                  {loadedVideos[project.id] && <source src={project.videoSrc} type="video/mp4" />}
-                </video>
+                {!isVideoReady ? (
+                  <button
+                    type="button"
+                    className="video-load-btn"
+                    onClick={() => setReadyVideos((prev) => ({ ...prev, [project.id]: true }))}
+                  >
+                    Load Preview
+                  </button>
+                ) : (
+                  <video autoPlay muted loop playsInline preload="metadata">
+                    <source src={project.videoSrc} type="video/mp4" />
+                  </video>
+                )}
               </div>
               <div className="video-overlay-gradient" />
             </div>
