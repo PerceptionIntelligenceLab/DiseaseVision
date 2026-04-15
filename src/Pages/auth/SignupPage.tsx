@@ -68,6 +68,7 @@ export default function SignupPage() {
             }),
           )
         } catch {
+          // Ignore storage write errors; OTP flow can continue without local cache.
         }
         toast({
           title: 'Registration started',

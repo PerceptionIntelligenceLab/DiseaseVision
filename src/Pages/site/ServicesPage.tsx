@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import type { MainLayoutOutletContext } from './mainLayoutContext'
 import dentimapVideo from '../../assets/videos/dentimap.mp4'
 import polypVideo from '../../assets/videos/polyp.mp4'
@@ -42,6 +42,7 @@ const projects = [
 export default function ServicesPage() {
   const { theme } = useOutletContext<MainLayoutOutletContext>()
   const isDark = theme === 'black'
+  const navigate = useNavigate()
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
   const [readyVideos, setReadyVideos] = useState<Record<string, boolean>>({})
 
@@ -116,10 +117,28 @@ export default function ServicesPage() {
                   <span className="bouncing-arrow">→</span>
                 </a>
               ) : (
-                <Link to={project.link} className="project-arrow-link">
+                <a
+                  href={project.link}
+                  className="project-arrow-link"
+                  onClick={(e) => {
+                    // Keep normal SPA navigation, but allow Ctrl/Cmd/middle-click to open new tab.
+                    if (
+                      e.defaultPrevented ||
+                      e.button !== 0 ||
+                      e.metaKey ||
+                      e.ctrlKey ||
+                      e.altKey ||
+                      e.shiftKey
+                    ) {
+                      return
+                    }
+                    e.preventDefault()
+                    navigate(project.link)
+                  }}
+                >
                   Try our model&nbsp;
                   <span className="bouncing-arrow">→</span>
-                </Link>
+                </a>
               )}
             </div>
           )

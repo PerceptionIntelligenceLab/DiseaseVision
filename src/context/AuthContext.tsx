@@ -41,6 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(next))
     } catch {
+      // Ignore storage write errors; auth state still works in-memory.
     }
   }, [])
 
@@ -49,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.removeItem(AUTH_STORAGE_KEY)
     } catch {
+      // Ignore storage cleanup errors.
     }
   }, [])
 

@@ -25,6 +25,7 @@ function readStoredTheme(): AppTheme {
     const stored = localStorage.getItem(THEME_STORAGE_KEY)
     if (stored === 'black' || stored === 'white') return stored
   } catch {
+    void 0
   }
   return 'white'
 }
@@ -39,6 +40,7 @@ function MainLayout() {
       try {
         localStorage.setItem(THEME_STORAGE_KEY, next)
       } catch {
+        void 0
       }
       return next
     })
