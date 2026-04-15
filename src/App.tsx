@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import Navbar from './Components/Navbar'
 import HomePage from './Pages/site/HomePage'
@@ -8,13 +8,13 @@ import OtpPage from './Pages/auth/OtpPage'
 import ForgotPasswordPage from './Pages/auth/ForgotPasswordPage'
 import ForgotPasswordOtpPage from './Pages/auth/ForgotPasswordOtpPage'
 import ResetPasswordPage from './Pages/auth/ResetPasswordPage'
-import AboutPage from './Pages/site/AboutPage'
-import ServicesPage from './Pages/site/ServicesPage'
-import ContactPage from './Pages/site/ContactPage'
-import OurTeamPage from './Pages/site/OurTeamPage'
-import PolypDetectionPage from './Pages/models/PolypDetectionPage'
-import DentimapPage from './Pages/models/DentimapPage'
-import VCEClassificationPage from './Pages/models/VCEClassificationPage'
+const AboutPage = lazy(() => import('./Pages/site/AboutPage'))
+const ServicesPage = lazy(() => import('./Pages/site/ServicesPage'))
+const ContactPage = lazy(() => import('./Pages/site/ContactPage'))
+const OurTeamPage = lazy(() => import('./Pages/site/OurTeamPage'))
+const PolypDetectionPage = lazy(() => import('./Pages/models/PolypDetectionPage'))
+const DentimapPage = lazy(() => import('./Pages/models/DentimapPage'))
+const VCEClassificationPage = lazy(() => import('./Pages/models/VCEClassificationPage'))
 
 const THEME_STORAGE_KEY = 'models-frontend-theme'
 
@@ -55,25 +55,33 @@ function MainLayout() {
 }
 
 function App() {
+  const routeLoader = (
+    <div className="px-6 pb-16 pt-[5.5rem] text-sm text-zinc-500">
+      Loading page...
+    </div>
+  )
+
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/otp" element={<OtpPage />} />
-      <Route path="/forgot-password/otp" element={<ForgotPasswordOtpPage />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="services" element={<ServicesPage />} />
-        <Route path="our-team" element={<OurTeamPage />} />
-        <Route path="contact" element={<ContactPage />} />
-        <Route path="models/polyp" element={<PolypDetectionPage />} />
-        <Route path="models/dentimap" element={<DentimapPage />} />
-        <Route path="models/vce" element={<VCEClassificationPage />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={routeLoader}>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/otp" element={<OtpPage />} />
+        <Route path="/forgot-password/otp" element={<ForgotPasswordOtpPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="our-team" element={<OurTeamPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="models/polyp" element={<PolypDetectionPage />} />
+          <Route path="models/dentimap" element={<DentimapPage />} />
+          <Route path="models/vce" element={<VCEClassificationPage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import type { MainLayoutOutletContext } from './mainLayoutContext'
 import dentimapVideo from '../../assets/videos/dentimap.mp4'
@@ -43,6 +43,7 @@ export default function ServicesPage() {
   const { theme } = useOutletContext<MainLayoutOutletContext>()
   const isDark = theme === 'black'
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
+  const [loadedVideos, setLoadedVideos] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -58,7 +59,10 @@ export default function ServicesPage() {
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) el.classList.add('visible')
+          if (entry.isIntersecting) {
+            el.classList.add('visible')
+            setLoadedVideos((prev) => (prev[id] ? prev : { ...prev, [id]: true }))
+          }
         },
         { threshold: 0.1 },
       )
@@ -83,8 +87,8 @@ export default function ServicesPage() {
           const videoBlock = (
             <div className="video-section">
               <div className="video-wrapper">
-                <video autoPlay muted loop playsInline preload="auto">
-                  <source src={project.videoSrc} type="video/mp4" />
+                <video autoPlay={!!loadedVideos[project.id]} muted loop playsInline preload="metadata">
+                  {loadedVideos[project.id] && <source src={project.videoSrc} type="video/mp4" />}
                 </video>
               </div>
               <div className="video-overlay-gradient" />

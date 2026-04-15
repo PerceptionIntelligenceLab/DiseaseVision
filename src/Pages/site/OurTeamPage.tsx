@@ -118,6 +118,8 @@ function TeamCard({ member, index, isDark }: TeamCardProps) {
         <img
           src={member.image}
           alt={member.name}
+          loading="lazy"
+          decoding="async"
           style={{
             width: '100%',
             height: '100%',
